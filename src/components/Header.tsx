@@ -8,7 +8,9 @@ import {
   SfInput,
   SfIconSearch,
   SfIconMenu,
+  SfIconArrowBack,
 } from '@storefront-ui/react';
+import logo from '../assets/logo.png';
 
 export const Header = () => {
   const [inputValue, setInputValue] = useState('');
@@ -41,19 +43,37 @@ export const Header = () => {
 
   return (
     <header className='flex justify-center w-full py-2 px-4 lg:py-5 lg:px-6 bg-white border-b border-neutral-200'>
-      <div className='flex flex-wrap lg:flex-nowrap items-center flex-row justify-start h-full max-w-[1536px] w-full'>
-        <h1 className='flex-1 hidden sm:block '>
-          <a
-            href='#'
-            aria-label='SF Homepage'
-            className='inline-block mr-4 focus-visible:outline focus-visible:outline-offset focus-visible:rounded-sm shrink-0 font-bold text-2xl text-primary-700'
-          >
-            Novaro Store
-          </a>
-        </h1>
+      <div className='flex flex-wrap justify-between lg:flex-nowrap items-center flex-row md:justify-start h-full max-w-[1536px] w-full'>
+        <SfButton
+          variant='tertiary'
+          square
+          className='md:hidden'
+          aria-label='Go back'
+        >
+          <SfIconArrowBack />
+        </SfButton>
+        <a
+          href='#'
+          aria-label='SF Homepage'
+          className='inline-block mr-4 focus-visible:outline focus-visible:outline-offset focus-visible:rounded-sm shrink-0'
+        >
+          <img
+            src={logo}
+            alt='Sf Logo'
+            className='w-[175px] h-12 md:w-[176px] lg:w-[12.5rem]'
+          />
+        </a>
+        <SfButton
+          variant='tertiary'
+          square
+          className='md:hidden'
+          aria-label='Search'
+        >
+          <SfIconSearch />
+        </SfButton>
         <SfButton
           aria-label='Open categories'
-          className='lg:hidden order-first lg:order-1 mr-4'
+          className='hidden md:block lg:hidden order-first lg:order-1 mr-4'
           square
           variant='tertiary'
         >
@@ -61,6 +81,7 @@ export const Header = () => {
         </SfButton>
         <SfButton
           className='hidden lg:flex lg:mr-4'
+          type='button'
           variant='tertiary'
           slotSuffix={<SfIconExpandMore className='hidden lg:block' />}
         >
@@ -70,7 +91,7 @@ export const Header = () => {
         </SfButton>
         <form
           role='search'
-          className='flex flex-1 mt-2 lg:mt-0 pb-2 lg:pb-0'
+          className='hidden md:flex flex-[100%] order-last lg:order-3 mt-2 lg:mt-0 pb-2 lg:pb-0'
           onSubmit={search}
         >
           <SfInput
@@ -96,7 +117,7 @@ export const Header = () => {
             onChange={(event) => setInputValue(event.target.value)}
           />
         </form>
-        <nav className='flex justify-end lg:ml-4'>
+        <nav className='flex-1 hidden md:flex justify-end lg:order-last lg:ml-4'>
           <div className='flex flex-row flex-nowrap'>
             {actionItems.map((actionItem) => (
               <SfButton
